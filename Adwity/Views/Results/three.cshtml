@@ -1,0 +1,105 @@
+﻿@using Adwity.Models
+@{ 
+    adwityEntities db = new adwityEntities();
+    Medicine medicine = ViewBag.medicine;
+    Medicine Alt = db.Medicines.Where(o => o.material.Contains(medicine.material) && o.name != medicine.name).FirstOrDefault();
+} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine information</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/logo.png">
+    <!-- Render All Elements Normally -->
+    <link rel="stylesheet" href="/assets/CSS/Normalize.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="/assets/CSS/all.min.css">
+    <link rel="stylesheet" href="/assets/Css/result-three.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <img class="logo" src="/assets/img/logo.png" alt="">
+    <a class="home" href="#">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Our Services</button>
+        <div class="dropdown-content">
+            <a href="#">Alternative medicine</a>
+            <a href="#">Replacement medications</a>
+            <a href="#">Medicine information</a>
+        </div>
+    </div>
+    <div class="dropdown-container5">
+        <button class="dropdown-toggle5">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+        </button>
+        <ul class="dropdown-menu5">
+            <li><a href="/user/changepassword">Change Password</a></li>
+            <li><a href="/home/logout">Logout</a></li>
+        </ul>
+    </div>
+    <input type="search" id="name" placeholder="Type your medicine name" required>
+        <input class="search" id="sub" type="button" value="Search">
+    <div class="grid-container">
+        <div class="image item1">
+            <img src="@medicine.image">
+        </div>
+        <div class="name item2">@medicine.name</div>
+        <div class="grid-item item3">What it is? </div>
+        <div class="grid-item item4">Alternative drug</div>
+        <div class="grid-item item5">contraindications and precautions</div>
+        <div class="grid-item item5" style="width: 350px;">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, voluptatem.
+        </div>
+        <div class="grid-item item5" style="width: 350px;">
+            @if (Alt != null)
+            {
+                @Alt.name
+            }
+            NOT AVALIABLE   
+        </div>
+        <div class="grid-item item5" style="width: 350px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quasi.
+        </div>
+    </div>
+    </div>
+    <footer></footer>
+    <script>
+        $('#sub').click(function () {
+            var medicine = $('#name').val();
+
+            // Send AJAX request
+            $.ajax({
+                type: 'get',
+                url: '/apis/servicethree?name=' + medicine,
+                success: function (response) {
+                    // Handle success response
+                    if (response.code == 200) {
+                        window.location.href = "/results/three?name=" + medicine;
+                    }
+                    else {
+                        swal.fire('error', "Medicine not avaliable", "error");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

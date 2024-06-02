@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternative medicine</title>
+    <link rel="icon" type="image/x-icon" href="./img/logo.png">
+    <!-- Render All Elements Normally -->
+    <link rel="stylesheet" href="CSS/Normalize.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="/assets/CSS/all.min.css">
+    <link rel="stylesheet" href="/assets/Css/Service-two.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <img class="logo" src="/assets/img/logo.png" alt="">
+    <a class="home" href="/user" target="_blank">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Our Services</button>
+        <div class="dropdown-content">
+            <a href="/services/one" target="_blank">Alternative medicine</a>
+            <a href="/services/two" target="_blank">Replacement medications</a>
+            <a href="/services/three" target="_blank">Medicine information</a>
+        </div>
+    </div>
+    <div class="dropdown-container">
+        <button class="dropdown-toggle">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="/user/changepassword">Change Password</a></li>
+            <li><a href="/home/logout">Logout</a></li>
+        </ul>
+    </div>
+    <h1>Replacement medications</h1>
+    <h4>There’s Many Replacement medication for you</h4>
+    <input type="search" id="rep" placeholder="Type your replacement medicine name" required>
+    <input type="search" id="name" placeholder="Type your replacement you want to take it " required>
+    <input class="branches" list="branches" name="branches" placeholder="Type your city name" required>
+    <datalist id="branches">
+        <option value="الأسكندرية">
+        <option value="الإسماعيلية">
+        <option value="اسوان">
+        <option value="اسيوط">
+        <option value="الأقصر">
+        <option value="البحر الأحمر">
+        <option value="البحيرة">
+        <option value="بني سويف">
+        <option value="بورسعيد">
+        <option value="جنوب سيناء">
+        <option value="الجيزة">
+        <option value="الدقهلية">
+        <option value="دمياط">
+        <option value="سوهاج">
+        <option value="السويس">
+        <option value="الشرقية">
+        <option value="شمال سيناء">
+        <option value="الغربية">
+        <option value="الفيوم">
+        <option value="القاهرة">
+        <option value="القليوبية">
+        <option value="قنا">
+        <option value="كفر الشيخ">
+        <option value="مطروح">
+        <option value="المنوفية">
+        <option value="المنيا">
+        <option value="الوادي الجديد">
+    </datalist>
+        <input id="sub" class="search" type="button" value="Search">
+
+    <script>
+        var selectedValue;
+        $(document).ready(function () {
+            // Listen for the change event on the input field with the 'branches' class
+            $('.branches').change(function () {
+                // Get the selected option value
+                selectedValue = $(this).val();
+
+                // Log the selected value to the console
+                console.log(selectedValue);
+            });
+        });
+
+        $('#sub').click(function(){
+            var medicine = $('#name').val();
+            var branches = selectedValue;
+            var alt = $('#rep').val();
+            // Send AJAX request
+            $.ajax({
+                type: 'get',
+                url: '/apis/servicetwo?medicine='+medicine+ '&alt=' + alt +'&branches='+branches,
+                success: function (response) {
+                    // Handle success response
+                    if (response.code == 200) {
+                        window.location.href = "/results/two?name=" + medicine + '&alt=' + alt + "&branches=" + branches;
+                    }
+                    else {
+                        swal.fire('error', "Medicine not avaliable", "error");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

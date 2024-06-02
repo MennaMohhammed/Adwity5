@@ -1,0 +1,84 @@
+/* Google Fonts - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  font-family: 'Hedvig Letters Serif', 'Merriweather';
+  background-color: rgba(240, 240, 240, 1);
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+}
+
+
+.logo {
+  width: 250px;
+  position: fixed;
+  left: 35px;
+  top: -30px;
+}
+
+.Sign-user {
+  position: fixed;
+  left: 43.5%;
+  top: 25%;
+  color: rgba(0, 0, 0, 0.64);
+}
+
+input[type=text],
+input[type=password],
+input[type=submit]
+{
+  background-color: rgba(217, 217, 217, 1);
+  width: 350px;
+  padding: 5px 38px;
+  border-radius: 32px;
+  height: 40px;
+  cursor: pointer;
+  position: absolute;
+  border: 2px solid black;
+}
+
+#user1 {
+  position: absolute;
+  top: 42%;
+  left: 21%;
+}
+
+#user2 {
+  position: absolute;
+  top: 42%;
+  left: 51%;
+}
+
+.Pw1 {
+  position: absolute;
+  top: 52%;
+  left: 21%;
+}
+
+.Pw2 {
+  position: absolute;
+  top: 52%;
+  left: 51%;
+}
+
+input[type=submit] {
+  position: absolute;
+  left: 36%;
+  top: 65%;
+  font-weight: bold;
+}
+
+input:active {
+  background-color: rgba(217, 217, 217, 1);
+}
+

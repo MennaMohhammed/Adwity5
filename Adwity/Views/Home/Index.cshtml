@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADWITY</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/logo.png">
+    <!-- Render All Elements Normally -->
+    <link rel="stylesheet" href="/assets/Css/Normalize.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="/assets/Css/all.min.css">
+    <link rel="stylesheet" href="/assets/Css/welcome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/CSS/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <script defer src="/assets/Java Script/welcome.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+</head>
+<body>
+
+    <img class="logo" src="/assets/img/logo.png">
+    <img class="welcome" src="/assets/img/welcome.png">
+    <div class="login">
+        <form id="myForm" action="" target="_blank" method="get">
+            <h3 class="user1" style="color: white;">Login</h3> <br>
+            <input type="text" id="user" name="username" placeholder="Enter Your Username" required><br><br>
+            <input type="password" id="password" name="password" placeholder="Enter Your Password" required><br><br>
+            <input class="identity" list="identity" name="identity" placeholder="Choose Your Identity" required>
+            <datalist id="identity">
+                <option value="Pharmacy">
+                <option value="User">
+            </datalist><br><br>
+            <input type="submit" id="log" name="log" value="Login"> <br> <br>
+            <hr style="color: white;">
+            <br>
+    </div>
+    <a>
+        <img class="icon-user" src="/assets/img/user1.png">
+    </a>
+    <img class="user-login" src="/assets/img/user (2).png" style="width: 25px; position: absolute; top: 237px; right: 395px;" alt="">
+    <img class="lock" src="/assets/img/padlock (1).png" style="width: 25px; position: absolute; top: 295px; right: 395px;" alt="">
+    <img class="print" src="/assets/img/fingerprint (1).png" style="width: 25px; position: absolute; top: 353px; right: 395px;" alt="">
+    <i id="eyeicon" class="fa fa-eye-slash" aria-hidden="true" style="width: 25px; position: absolute; top: 300px; right: 190px;"></i>
+    </form>
+    <script>
+        $(document).ready(function () {
+            $('#myForm').submit(function (e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                // Serialize form data
+                var formData = $(this).serialize();
+
+                // Send AJAX request
+                $.ajax({
+                    type: 'get',
+                    url: '/apis/login',
+                    data: formData,
+                    success: function (response) {
+                        // Handle success response
+                        if (response.code == 200) {
+                            window.location.href = "/home/redirect?id=" + response.id;
+                        }
+                        else {
+                            console.log("error");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        let eyeicon = document.getElementById("eyeicon");
+        let password = document.getElementById("password");
+        eyeicon.onclick = function () {
+            if (password.type == "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+        }
+    </script>
+    <button data-modal-target="#modal">Create New Account</button>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="title">Sign Up</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="form-element1">
+                <a href="/register/pharmacy" style="text-decoration: none;
+        color: #222;
+        text-align: center; font-weight: bold;font-size: 25px; position: absolute;
+        left: 100px;
+        bottom: 50.5px;">Pharmacy</a>
+            </div>
+            <div id="form-element2">
+                <a href="/register/user" style=" text-decoration: none;
+        color: #222;
+        text-align: center;
+        position: absolute;
+        left: 330px;
+        bottom: 50.5px; font-weight: bold;font-size: 25px;">User</a>
+            </div>
+        </div>
+    </div>
+    <div id="overlay"></div>
+
+
+</body>
+</html>

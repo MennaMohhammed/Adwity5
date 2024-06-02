@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/logo.png">
+    <!-- Render All Elements Normally -->
+    <link rel="stylesheet" href="/assets/Css/Normalize.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="/assets/Css/all.min.css">
+    <link rel="stylesheet" href="/assets/Css/Sign-in-user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/CSS/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+    <img class="logo" src="/assets/img/logo.png" alt="">
+    <h1 class="Sign-user">Sign Up</h1>
+    <form id="myForm">
+        <input type="text" id="user1" name="fname" placeholder="First name" required><br><br>
+        <input type="text" id="user2" name="lname" placeholder="Surname" required><br><br>
+        <input type="password" class="Pw1" name="password" id="password1" placeholder="New password" required>
+        <br><br>
+        <input type="password" class="Pw2" name="repassword" id="password2" placeholder="Re-enter new password" required>
+        <br><br>
+        <input type="submit" id="sign1" name="sign1" value="Sign Up">
+    </form>
+    <i id="eyeicon1" class="fa fa-eye-slash eyeclass" aria-hidden="true" style="width: 25px; position: absolute; top: 400px; right: 930px;"></i>
+    <i id="eyeicon2" class="fa fa-eye-slash eyeclass" aria-hidden="true" style="width: 25px; position: absolute; top: 400px; right: 450px;"></i>
+    <script>
+        $(document).ready(function () {
+            $('#myForm').submit(function (e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                // Serialize form data
+                var formData = $(this).serialize();
+
+                // Send AJAX request
+                $.ajax({
+                    type: 'post',
+                    url: '/apis/newuser',
+                    data: formData,
+                    success: function (response) {
+                        // Handle success response
+                        if (response.code == 200) {
+                            swal.fire("success", "signed up successfuly", "success");
+                        } else {
+                            swal.fire('error', "something went wrong please try again", "error");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // ChangeIcon(eyeicon1,password1);
+        // ChangeIcon(eyeicon1,password1);
+        let eyeicon1 = document.getElementById("eyeicon1");
+        let password1 = document.getElementById("password1");
+        eyeicon1.onclick = function () {
+            if (password1.type == "password") {
+                password1.type = "text";
+            } else {
+                password1.type = "password";
+            }
+        }
+
+        let eyeicon2 = document.getElementById("eyeicon2");
+        let password2 = document.getElementById("password2");
+        eyeicon2.onclick = function () {
+            if (password2.type == "password") {
+                password2.type = "text";
+            } else {
+                password2.type = "password";
+            }
+        }
+
+        // function ChangeIcon(eyeicontag,passwordctrl)
+        // {
+        //   let eyeicontag = document.getElementById(eyeicontag);
+        //   let passwordctrl = document.getElementById(passwordctrl);
+        //   eyeicontag.onclick = function(){
+        //     if(passwordctrl.type == "password"){
+        //       passwordctrl.type = "text";
+        //     }else{
+        //       passwordctrl.type = "password";
+        //     }
+        //   }
+        // }
+    </script>
+</body>
+</html>
