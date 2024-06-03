@@ -93,16 +93,16 @@
                 // Send AJAX request
                 $.ajax({
                     type: 'get',
-                    url: '/apis/removemedicine?medicine='+id,
+                    url: '/apis/removemedicine?medicine=' + id,
                     contentType: false, // Ensure jQuery does not set the Content-Type
                     processData: false, // Prevent jQuery from processing the data
                     success: function (response) {
                         // Handle success response
                         if (response.code == 200) {
-                            Swal.fire("success","item has been deleted!","success");
+                            Swal.fire("success", "item has been deleted!", "success");
                             window.location.reload();
                         } else {
-                            Swal.fire("error","Something Went Wrong please try again!","error");
+                            Swal.fire("error", "Something Went Wrong please try again!", "error");
                         }
                     },
                     error: function (xhr, status, error) {
@@ -112,6 +112,18 @@
                 });
             }
         }
+/**/
+
+            /**/
     </script>
+    @if (Session["first"] != null)
+    {
+        Session["first"] = null;
+        <script>
+            $(document).ready(function () {
+            swal.fire("welcome", "welcome back", "success");
+        });
+        </script>
+    }
 </body>
 </html>

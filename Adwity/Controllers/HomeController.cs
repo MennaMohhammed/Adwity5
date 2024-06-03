@@ -25,7 +25,7 @@ namespace Adwity.Controllers
                 return Redirect("/user");
             }
         }
-        public ActionResult lgout()
+        public ActionResult logout()
         {
             Session["id"] = null;
             return Redirect("/");

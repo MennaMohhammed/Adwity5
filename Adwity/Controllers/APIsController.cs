@@ -49,6 +49,7 @@ namespace Adwity.Controllers
             if (result != 0)
             {
                 Session["id"] = result;
+                Session["first"] = true;
                 return Json(new { code = HttpStatusCode.OK, id = result }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -71,7 +72,8 @@ namespace Adwity.Controllers
             }
             else if(Insert.AddUser(fname, lname, password, username))
             {
-                return Json(new { code = HttpStatusCode.OK });
+
+                return Login(username, password);
             }
             else
             {
@@ -102,7 +104,7 @@ namespace Adwity.Controllers
             }
             else if (Insert.AddPharmacy(fname, pname, password, username, image, branches))
             {
-                return Json(new { code = HttpStatusCode.OK });
+                return Login(username, password);
             }
             else
             {

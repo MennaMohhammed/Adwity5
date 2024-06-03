@@ -82,5 +82,14 @@
     </div>
     <img class="user-img" src="/assets/img/home user (2).png">
     @Html.Partial("footer")
+    @if (Session["first"] != null)
+    {
+        Session["first"] = null;
+        <script>
+            $(document).ready(function () {
+                swal.fire("welcome", "welcome back", "success");
+            });
+        </script>
+    }
 </body>
 </html>

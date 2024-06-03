@@ -14,7 +14,8 @@ namespace Adwity.Controllers
         {
             if(Session["id"] == null)
                 return Redirect("/");
-            ViewBag.medicines = Fetch.PharmacyHome(3);
+            int id = (int)Session["id"];
+            ViewBag.medicines = Fetch.PharmacyHome(id);
             return View();
         }
         public ActionResult NewMedicine() 

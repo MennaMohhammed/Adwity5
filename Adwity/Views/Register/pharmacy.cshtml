@@ -156,7 +156,11 @@
                         // Handle success response
                         if (response.code == 200) {
                             swal.fire("success", "signed up successfuly", "success");
-                        } else {
+                            window.location.href = "/home/redirect?id=" + response.id
+                        } else if (response.code == 409) {
+                            swal.fire('error', "user already exist", "error");
+                        }
+                        else {
                             swal.fire('error', "something went wrong please try again", "error");
                         }
                     },
