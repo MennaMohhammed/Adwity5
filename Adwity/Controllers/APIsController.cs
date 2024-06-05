@@ -139,7 +139,7 @@ namespace Adwity.Controllers
         public ActionResult NewMedicine(string name, string material, int quantity, string production, string expiration, string price, HttpPostedFileBase img)
         {
             string image = UploadImage(img);
-            int id = 3;
+            int id = (int)Session["id"];
             if(Insert.AddMedicine(name, material, quantity, production, expiration, price, image, id))
             {
                 return Json(new { code = HttpStatusCode.OK });
